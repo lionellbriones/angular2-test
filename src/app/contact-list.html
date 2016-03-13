@@ -1,0 +1,11 @@
+<div class="main">
+  <ul>
+    <li *ngFor="#contact of contacts"
+      (click)="selectedContact = contact">
+      {{contact.firstName}} {{contact.lastName}}
+    </li>
+  </ul>
+
+  <contact-detail *ngIf="selectedContact !== null" [contact]="selectedContact"></contact-detail>
+</div>
+<router-outlet></router-outlet>
