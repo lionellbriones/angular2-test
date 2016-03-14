@@ -1,24 +1,30 @@
-<form #contactForm="ngForm">
-</form>
-<div *ngIf="contact">
+<form [ngFormModel]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
   <br>
   <div>
     <label>First Name:</label>
-    <input [(ngModel)]="contact.firstName" placeholder="first name"/>
+    <input placeholder="first name"
+      [ngFormControl]="contactForm.controls['firstName']"
+      [(ngModel)]="contact.firstName"/>
   </div>
   <div>
     <label>Last Name:</label>
-    <input [(ngModel)]="contact.lastName" placeholder="last name"/>
+    <input placeholder="last name"
+      [ngFormControl]="contactForm.controls['lastName']"
+      [(ngModel)]="contact.lastName"/>
   </div>
   <div>
     <label>Phone Number:</label>
-    <input [(ngModel)]="contact.phone" placeholder="phone"/>
+    <input placeholder="phone"
+      [ngFormControl]="contactForm.controls['phone']"
+      [(ngModel)]="contact.phone"/>
   </div>
   <div>
     <label>Email Address:</label>
-    <input [(ngModel)]="contact.email" placeholder="email"/>
+    <input placeholder="email"
+      [ngFormControl]="contactForm.controls['email']"
+      [(ngModel)]="contact.email"/>
   </div>
   <br>
-  <button (click)="save()">Save</button>
-  <button (click)="cancel()">Cancel</button>
-</div>
+  <button type="submit">Save</button>
+  <button type="button" (click)="cancel()">Cancel</button>
+</form>

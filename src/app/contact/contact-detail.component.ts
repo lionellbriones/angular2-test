@@ -24,16 +24,20 @@ export class ContactDetailComponent implements OnInit, CanDeactivate {
   ngOnInit() {
     this.id = this._routeParams.get('id');
     this.contactForm = this._formBuilder.group({
-      'firstName': ['', Validators.required]
-    })
-    if( this.id === "create" ){
-      this.contact = {
-        firstName: '',
-        lastName: '',
-        phone: '',
-        email: ''
-      }
-    }else{
+      'firstName': ['', Validators.required],
+      'lastName': ['', Validators.required],
+      'phone': ['', Validators.required],
+      'email': ['', Validators.required]
+    });
+
+    this.contact = {
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: ''
+    };
+
+    if( this.id !== "create" ){
       this._service.get(+this.id).then(contact => {
         if (contact) {
           this.contact = contact;
@@ -52,6 +56,16 @@ export class ContactDetailComponent implements OnInit, CanDeactivate {
 
   cancel() {
     this.gotoList();
+  }
+
+  onSubmit(value){
+    console.log(value);
+    if( this.id === "create" ){
+      this._service.new(this.contact);
+      this.gotoList();
+    }else{
+      this.gotoList();
+    }
   }
 
   save() {
